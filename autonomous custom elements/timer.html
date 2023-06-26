@@ -1,0 +1,66 @@
+<!doctype html>
+<head>
+    <title>Timer</title>
+
+    <meta charset="utf-8">
+</head>
+<body>
+    <time-formatted  year="numeric" month="long" day="numeric" hour="numeric" minute="numeric"
+        second="numeric" time-zone-name="short"></time-formatted>
+
+    <script>
+        class TimeFormatted extends HTMLElement {
+
+            constructor(){
+                super();
+                this.setAttribute('datetime', new Date());
+            }
+
+            render(){
+                var date = new Date(this.getAttribute('datetime')) || Date.now();
+                this.innerHTML = new Intl.DateTimeFormat("default", {
+                    year: this.getAttribute('year') || undefined,
+                    month: this.getAttribute('month') || undefined,
+                    day: this.getAttribute('day') || undefined,
+                    hour: this.getAttribute('hour') || undefined,
+                    minute: this.getAttribute('minute') || undefined,
+                    second: this.getAttribute('second') || undefined,
+                    timeZoneName: this.getAttribute('time-zone-name') || undefined,
+                }).format(date);
+            }
+
+            connectedCallback() {
+                if(!this.rendered){
+                    this.render();
+                    this.rendered = true; 
+                    this.secondInterval = setInterval(this.update.bind(this),1000);
+                    //if bind is not used, this in update() will refer to window object!!
+                }  
+            }
+
+            disconnectedCallback(){
+                clearInterval(this.secondInterval);
+            }
+
+            update(){   
+                this.setAttribute('datetime',new Date());
+            }
+
+            static get observedAttributes(){
+                return ['datetime'];
+            }
+
+            attributeChangedCallback(name, oldValue, newValue){
+                this.render();
+            }
+
+        }
+
+
+        customElements.define("time-formatted", TimeFormatted);
+ 
+    </script>
+
+    
+
+</body>
