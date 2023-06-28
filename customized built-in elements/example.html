@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Custom elements</title>
+
+        <meta charset="utf-8">
+
+        <style>
+            button{
+                height: 80px;
+                width:100px;
+                display:block;
+                margin:auto;
+                background-color: rgb(78, 78, 246);
+                color:white;
+                font-size: large;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <button  id="clickbutton" is="extended-button">Click Me!</button>
+
+        <script>
+            class ExtendedButton extends HTMLButtonElement{
+                constructor(){
+                    super();
+                    this.addEventListener('click',()=>{alert("clicked")});
+                }
+            }
+            customElements.define('extended-button',ExtendedButton,{extends:'button'});
+
+            //not good to directly reference button!
+            clickbutton.onclick=function(){console.log('clicked');}
+        </script>
+    </body>
+</html>
