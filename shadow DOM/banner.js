@@ -5,8 +5,8 @@ class BannerElement extends HTMLElement {
 
     connectedCallback() {
         /* Create Shadow Element */
-        //const shadowElem = this.attachShadow({ mode: "open" });
-        const shadowElem = this.attachShadow({ mode: "closed" });
+        const shadowElem = this.attachShadow({ mode: "open" });
+        //const shadowElem = this.attachShadow({ mode: "closed" });
 
         /* Style Shadow Element */
         //const styleElem = document.createElement('style');
