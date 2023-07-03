@@ -4,14 +4,10 @@ class BannerElement extends HTMLElement {
     }
 
     connectedCallback() {
-        /* Create Shadow Element */
-        //const shadowElem = this.attachShadow({ mode: "open" });
-        const shadowElem = this.attachShadow({ mode: "closed" });
+        const shadowElem = this.attachShadow({ mode: "open" });
+        //const shadowElem = this.attachShadow({ mode: "closed" });
 
         /* Style Shadow Element */
-        //const styleElem = document.createElement('style');
-        //styleElem.innerHTML =
-        //will have to remove <style></style> if using styleElem 
         const style=`<style>
                             p,
                             h2 {
@@ -45,17 +41,16 @@ class BannerElement extends HTMLElement {
                             </style>
                         `
         shadowElem.innerHTML=style;
-        //shadowElem.appendChild(styleElem);
         
         /* Markup */
         const divElem = document.createElement('div');
         divElem.innerHTML = `<div class="wrapper">
                                     <p class="light">${this.getAttribute('category') || ''}</p>
-                                    <h2>${this.getAttribute('title') || ''}</h2>
+                                    <h2>${this.title || ''}</h2>
                                     <p>${this.getAttribute('description') || ''}</p>
                                     <h3><a href="some website">Learn More</a></h3>
                                 </div>`;
-        shadowElem.appendChild(divElem);
+        shadowElem.append(divElem);
     }
 }
 
