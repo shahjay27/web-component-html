@@ -25,13 +25,10 @@
             class ExtendedButton extends HTMLButtonElement{
                 constructor(){
                     super();
-                    this.addEventListener('click',()=>{alert("clicked")});
+                    this.onclick=function(){console.log('clickedinside')}
                 }
             }
             customElements.define('extended-button',ExtendedButton,{extends:'button'});
-
-            //not good to directly reference button!
-            clickbutton.onclick=function(){console.log('clicked');}
         </script>
     </body>
 </html>
